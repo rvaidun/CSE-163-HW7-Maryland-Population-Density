@@ -77,9 +77,8 @@ function drawMap() {
     .style("fill", (d) => {
       let val = popData.filter((p) => {
         return p["GCT_STUB.target-geo-id"] == d.properties.GEO_ID;
-      })[0];
+      })[0]["Density per square mile of land area"];
       if (isNaN(val)) return "grey";
-      return colorScale(+val["Density per square mile of land area"]);
       return colorScale(val);
     })
     .style("stroke", drawborder ? "black" : "none")
