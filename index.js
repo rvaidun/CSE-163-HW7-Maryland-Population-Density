@@ -77,8 +77,9 @@ function drawMap() {
     .style("fill", (d) => {
       let val = popData.filter((p) => {
         return p["GCT_STUB.target-geo-id"] == d.properties.GEO_ID;
-      })[0]["Density per square mile of land area"];
+      })[0];
       if (isNaN(val)) return "grey";
+      return colorScale(+val["Density per square mile of land area"]);
       return colorScale(val);
     })
     .style("stroke", drawborder ? "black" : "none")
@@ -89,7 +90,7 @@ function drawMap() {
       if (drawborder)
         d3.select(this).style("stroke", "cyan").style("stroke-width", 4);
       tooltip.transition().duration(50).style("opacity", 1);
-      mapttstring = `Country: ${d.properties.NAME} <br/> Population Density per square mile of land area: ${val}`;
+      mapttstring = `County: ${d.properties.NAME} <br/> Population Density per square mile of land area: ${val}`;
     })
     .on("mousemove", function (d, i) {
       tooltip
